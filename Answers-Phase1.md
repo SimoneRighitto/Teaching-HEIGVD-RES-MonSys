@@ -77,6 +77,15 @@ PS C:\Users\RighitZ\Documents\Heig-VD\4semestre\RES\GitHub\Teaching-HEIGVD-RES-M
 ```
 # -- YOUR ANSWER TO QUESTION 2 --
 
+PS C:\Users\RighitZ\Documents\Heig-VD\4semestre\RES\GitHub\Teaching-HEIGVD-RES-MonSys\monsys-web-infra> vagrant ssh
+Welcome to Ubuntu 14.04 LTS (GNU/Linux 3.13.0-24-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+Last login: Thu May  8 07:58:20 2014 from 10.0.2.2
+vagrant@ubuntu-14:~$ uname -a
+Linux ubuntu-14 3.13.0-24-generic #46-Ubuntu SMP Thu Apr 10 19:11:08 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+vagrant@ubuntu-14:~$
+
 # -------------------------------
 ```
 
@@ -88,6 +97,15 @@ PS C:\Users\RighitZ\Documents\Heig-VD\4semestre\RES\GitHub\Teaching-HEIGVD-RES-M
 
 ```
 # -- YOUR ANSWER TO QUESTION 4 --
+
+vagrant@ubuntu-14:~$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+heig/rp-nginx       latest              65eb30535221        4 days ago          637.9 MB
+heig/app-nodejs     latest              41dcedeac0bb        4 days ago          398.9 MB
+heig/web-apache     latest              2ca70c45d584        4 days ago          411.9 MB
+<none>              <none>              3e9e5c4aa23b        4 days ago          637.9 MB
+dockerfile/ubuntu   latest              cbc81be8f75e        2 weeks ago         378.6 MB
+vagrant@ubuntu-14:~$
 
 # -------------------------------
 ```
