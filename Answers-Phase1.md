@@ -92,12 +92,6 @@ vagrant@ubuntu-14:~$
 ```
 # -- YOUR ANSWER TO QUESTION 3 --
 
-# -------------------------------
-```
-
-```
-# -- YOUR ANSWER TO QUESTION 4 --
-
 vagrant@ubuntu-14:~$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 heig/rp-nginx       latest              65eb30535221        4 days ago          637.9 MB
@@ -111,7 +105,29 @@ vagrant@ubuntu-14:~$
 ```
 
 ```
+# -- YOUR ANSWER TO QUESTION 4 --
+
+vagrant@ubuntu-14:~$ docker ps
+CONTAINER ID        IMAGE                    COMMAND                CREATED              STATUS              PORTS
+            NAMES
+155dcf6c5f86        heig/app-nodejs:latest   node /opt/server.js    About a minute ago   Up About a minute   0.0.0.0:7070->80/tcp   app-node
+c4ccce596298        heig/web-apache:latest   /usr/sbin/apache2ctl   About a minute ago   Up About a minute   0.0.0.0:8082->80/tcp   web-node-2
+4078a4cac91e        heig/web-apache:latest   /usr/sbin/apache2ctl   About a minute ago   Up About a minute   0.0.0.0:8081->80/tcp   web-node-1
+f24198982d98        heig/rp-nginx:latest     /opt/init.sh           About a minute ago   Up About a minute   0.0.0.0:9090->80/tcp   rp-node
+
+# -------------------------------
+```
+
+```
 # -- YOUR ANSWER TO QUESTION 5 --
+
+155dcf6c5f86: "IPAddress": "172.17.0.5"
+
+c4ccce596298: "IPAddress": "172.17.0.4"
+
+4078a4cac91e: "IPAddress": "172.17.0.3"
+
+f24198982d98: "IPAddress": "172.17.0.2"
 
 # -------------------------------
 ```
