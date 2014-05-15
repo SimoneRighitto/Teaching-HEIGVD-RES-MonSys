@@ -136,7 +136,7 @@ f24198982d98: "IPAddress": "172.17.0.2"
 # -- YOUR ANSWER TO QUESTION 6 --
 
 Host (your laptop):
-- IP address: H.H.H.H
+- IP address: 10.192.85.221
 
 Virtual Machine run by Virtual Box
 - IP address: B.B.B.B
