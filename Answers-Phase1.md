@@ -524,14 +524,12 @@ And here is the answer:
 
 	
 And from the local browser:
-
-<center><img width=520 src="screenshot/live.png"></center>
-
-<center><img width=520 src="screenshot/leaderboard.png"></center>
 	
 
 
 # -------------------------------
 ```
+<center><img width=520 src="screenshot/live.png"></center>
 
+<center><img width=520 src="screenshot/leaderboard.png"></center>
 
