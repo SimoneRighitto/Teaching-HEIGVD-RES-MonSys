@@ -121,13 +121,13 @@ f24198982d98        heig/rp-nginx:latest     /opt/init.sh           About a minu
 ```
 # -- YOUR ANSWER TO QUESTION 5 --
 
-155dcf6c5f86: "IPAddress": "172.17.0.5"
+app-node: "IPAddress": "172.17.0.5"
 
-c4ccce596298: "IPAddress": "172.17.0.4"
+web-node-2: "IPAddress": "172.17.0.4"
 
-4078a4cac91e: "IPAddress": "172.17.0.3"
+web-node-1: "IPAddress": "172.17.0.3"
 
-f24198982d98: "IPAddress": "172.17.0.2"
+rp-node: "IPAddress": "172.17.0.2"
 
 # -------------------------------
 ```
@@ -139,27 +139,27 @@ Host (your laptop):
 - IP address: 10.192.85.221
 
 Virtual Machine run by Virtual Box
-- IP address: B.B.B.B
-- PAT: packets arriving on H.H.H.H:PH are forwarded to B.B.B.B:PB
+- IP address: 192.168.33.20
+- PAT: packets arriving on 10.192.85.221:8080 are forwarded to 192.168.33.20:9090
 
 Docker Bridge
-- IP address: DB.DB.DB.DB
-- PAT: packets arriving on DB.DB.DB.DB:PB1 are forwarded to C1.C1.C1.C1:PC1
-- PAT: packets arriving on DB.DB.DB.DB:PB2 are forwarded to C2.C2.C2.C2:PC2
-- PAT: packets arriving on DB.DB.DB.DB:PB3 are forwarded to C3.C3.C3.C3:PC3
-- PAT: packets arriving on DB.DB.DB.DB:PB4 are forwarded to C4.C4.C4.C4:PC4
+- IP address: 172.17.42.1
+- PAT: packets arriving on 172.17.42.1:7070 are forwarded to 172.17.0.5:80
+- PAT: packets arriving on 172.17.42.1:8002 are forwarded to 172.17.0.4:80
+- PAT: packets arriving on 172.17.42.1:8081 are forwarded to 172.17.0.3:80
+- PAT: packets arriving on 172.17.42.1:9090 are forwarded to 172.17.0.2:80
 
 Docker Container 1
-- IP address: C1.C1.C1.C1
+- IP address: 172.17.0.5
 
 Docker Container 2
-- IP address: C2.C2.C2.C2
+- IP address: 172.17.0.4
 
 Docker Container 3
-- IP address: C3.C3.C3.C3
+- IP address: 172.17.0.3
 
 Docker Container 4
-- IP address: C4.C4.C4.C4
+- IP address: 172.17.0.2
 
 # -------------------------------
 ```
@@ -169,9 +169,74 @@ Docker Container 4
 
 Which command did you type on the terminal to establish the connection?
 
+telnet 192.168.33.20 9090
+
 What HTTP request did you type and send?
 
+GET / HTTP/1.1
+Host: www.monsys.com
+
+
 What HTTP response did you get?
+
+HTTP/1.1 200 OK
+Server: nginx/1.6.0
+Date: Thu, 15 May 2014 07:43:12 GMT
+Content-Type: text/html
+Content-Length: 1584
+Connection: keep-alive
+X-Powered-By: PHP/5.5.9-1ubuntu4
+Vary: Accept-Encoding
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
+                <link href='css/main.css' rel='stylesheet' type='text/css'>
+                <script type="text/javascript" src="script/jquery-1.6.4.js"></script>
+                <title>Welcome To MonSys Front-End</title>
+
+                <script language="JavaScript">
+
+                        $(document).ready(function () {
+                                refreshNodes();
+                        });
+
+                        function refreshNodes() {
+                            $.getJSON('/ajax/resources/nodes',
+                            function(data) {
+                                var items = [];
+
+                                $.each(data,
+                                function(key, val) {
+                                    items.push('<li>' + val.name + ", " + val.description + ", load: " + val.currentLoad
+Level + ' %</li>');
+                                });
+
+                                $('#monitor').html("<ul>" + items.join('') + "</ul>");
+                            });
+                                var t=setTimeout("refreshNodes()", 1000);
+                        }
+        </script>
+        </head>
+        <body>
+                <h1>Welcome to MonSys</h1>
+                <h2>You are connected to the front-end system, implemented in PHP</h2>
+                <b>Note</b>: this page is sending HTTP GET requests to <verbatim>/ajax/resources/nodes</verbatim> in ord
+er to retrieve JSON representations of the resources managed by the back-end.
+                <p/>
+
+                <div id="monitor">
+                        You should monitoring data coming from the back-end here.
+                </div>
+
+                <br/>
+                Brought to you by the University of Applied Sciences of Western Switzerland
+        </body>
+</html>
+
 # -------------------------------
 ```
 
@@ -180,9 +245,29 @@ What HTTP response did you get?
 
 Which command did you type on the terminal to establish the connection?
 
+	telnet www.monsys.com 9090
+	
+
 What HTTP request did you type and send?
 
+	GET /ajax/resources/node HTTP/1.1
+	Host: www.monsys.com
+
 What HTTP response did you get?
+
+HTTP/1.1 200 OK
+Server: nginx/1.6.0
+Date: Thu, 22 May 2014 06:46:24 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+
+fa
+[{"name":"P-001","description":"Epson Printer","currentLoadLevel":18.766175769269466},{"name":"P-002","description":"Can
+on Printer","currentLoadLevel":38.84145473130047},{"name":"P-003","description":"HP Printer","currentLoadLevel":35.73320
+18436864}]
+0
+
 # -------------------------------
 ```
 
